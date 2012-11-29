@@ -1,0 +1,25 @@
+<%= form_for @discuss, :url => { :action => "create", :id => :news_id} do |f| %>
+  <% if @discuss.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@discuss.errors.count, "error") %> prohibited this discuss from being saved:</h2>
+
+      <ul>
+      <% @discuss.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :comment %><br />
+    <%= f.text_area :comment %>
+  </div>
+<!--  <div class="field">
+    <%= f.label :news_id %><br />
+    <%= f.number_field :news_id %>
+  </div>  -->
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

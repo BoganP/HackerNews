@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Comment:</b>
+  <%= @discuss.comment %>
+</p>
+
+<p>
+  <b>News:</b>
+  <%= @discuss.news_id %>
+</p>
+
+<p>
+  <b>Created by:</b>
+  <% @user = User.find(@discuss.user_id) %>
+  <%= @user.email %>	
+</p>
+
+<%= link_to 'Edit', edit_discuss_path(@discuss) %> |
+<% if @discuss.news_id %>
+  <% news = News.find(@discuss.news_id) %>
+  <%= link_to 'Back', news_discusses_path(news) %>
+<%else%>
+  <%= link_to 'Back', discusses_path %>
+<%end%>

@@ -1,41 +1,22 @@
-<table bgcolor=#feead8 align=center border=0 rules=none>
-<tr bgcolor=#ff6600><td colspan="5" align=left>
-<a href="http://ycombinator.com/"><img src="http://ycombinator.com/images/y18.gif" style="border:1px white solid"></a>
-<b>Hacker News </b><%= link_to 'new', news_index_path %> | <font color='white'>comments</font> | <%= link_to 'submit', new_news_path %></td><td><td align=right>
-	<div id="user_nav">
-	  <% if user_signed_in? %>
-	    Signed in as <%= current_user.email %>. Not you?
-	    <%= link_to "logout", destroy_user_session_path(@post), :method => :delete %>
-	  <% else %>
-	    <%= link_to "login", new_user_session_path %>
-	  <% end %>
-	</div>
-</td></tr>
-<tr><td><p>
+<div>
 <% if params[:news_id] %>
-  <% @news = News.find(params[:news_id]) %>
   <%= @news.title %>
 <% end %><p>
-</td></tr>
-<tr><td>
+</div>
 <% @discuss = Discuss.new %>
 <%= render 'form' %>
-</td></tr>
+<div>
 <% @discusses.each do |discuss| %>
-  <tr>
-    <td><%= discuss.comment %></td>
-    <td><%= discuss.news_id %></td><td></td></tr>
-  <tr>
-    <td>
+
+  <%= discuss.news_id %>.  <%= discuss.comment %>
+
+ </div>
+  <div>
+
     <%= link_to 'remove', discuss, method: :delete, data: { confirm: 'Are you sure?' } %>
 	 | Created <%= time_ago_in_words discuss.created_at %> ago by 
-	<% if discuss.user_id != nil %>
-	<% @user =  User.find(discuss.user_id) %>
-	<%= @user.email %>
-	<% end %>
+	<%= discuss.user.try(:email) %>
 	
-  </tr><% end %>
-</table>
+  </div><% end %>
 
-<br />
 

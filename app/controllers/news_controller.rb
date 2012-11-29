@@ -29,8 +29,7 @@ class NewsController < ApplicationController
   # GET /news/new.json
   def new
     @news = News.new
-    puts "$"*50
-    puts current_user.id
+   
     
 
     respond_to do |format|
@@ -41,8 +40,7 @@ class NewsController < ApplicationController
 
   # GET /news/1/edit
   def edit
-    puts "$"*80
-    puts params
+   
     @news = News.find(params[:id])
     respond_to do |format|
       if (@news.user_id != current_user.id)
@@ -55,7 +53,7 @@ class NewsController < ApplicationController
   # POST /news.json
   def create
     @news = News.new(params[:news])
-    @news.user_id = current_user.id
+    @news.user = current_user
 
     respond_to do |format|
       if @news.save

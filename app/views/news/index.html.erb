@@ -1,21 +1,8 @@
-<table bgcolor=#feead8 align=center border=0 rules=none>
-<tr bgcolor=#ff6600><td colspan="3" align=left>
-<a href="http://ycombinator.com/"><img src="http://ycombinator.com/images/y18.gif" style="border:1px white solid"></a>
-<b><%= link_to "Hacker News", :sort => "title" %> </b>  <font color='white'><%= link_to "new", :sort => "created_at" %></font> | <%= link_to 'comments', discusses_path %> | <%= link_to 'submit', new_news_path %></td><td align=right>
-	<div id="user_nav">
-	  <% if user_signed_in? %>
-	    Signed in as <%= current_user.email %>. Not you?
-	    <%= link_to "logout", destroy_user_session_path(@post), :method => :delete %>
-	  <% else %>
-	    <%= link_to "login", new_user_session_path %>
-	  <% end %>
-	</div>
-</td></tr>
 
 <% @news.each do |news| %>
-  <tr><td><%= news.id %>. <%= link_to news.title, news.link %> (<%= truncate(news.link, :length => 25) %>)</td></tr>
-   <tr><td>
-    <%= link_to 'remove', news, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <div><%= news.id %>. <%= link_to news.title, news.link %> (<%= truncate_link(news.link) %>)</div>
+  <div>
+       <%= link_to 'remove', news, method: :delete, data: { confirm: 'Are you sure?' } %>
  | Created <%= time_ago_in_words news.created_at %> ago by 	
 	<% if news.user_id != nil %>
 	  <% @user =  User.find(news.user_id) %>
@@ -28,9 +15,4 @@
 	  <%= link_to 'discuss', news_discusses_path(news) %>
 	<%end%></td></tr>
 <% end %>
-</table>
-
-
-
-
 

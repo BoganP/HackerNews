@@ -3,7 +3,6 @@ class CreateDiscusses < ActiveRecord::Migration
     create_table :discusses do |t|
       t.string :comment
       t.integer :news_id
-      t.string :user_id
 
       t.timestamps
     end

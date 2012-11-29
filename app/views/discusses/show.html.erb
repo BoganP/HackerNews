@@ -16,7 +16,6 @@
   <%= @user.email %>	
 </p>
 
-<%= link_to 'Edit', edit_discuss_path(@discuss) %> |
 <% if @discuss.news_id %>
   <% news = News.find(@discuss.news_id) %>
   <%= link_to 'Back', news_discusses_path(news) %>

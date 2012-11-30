@@ -5,20 +5,55 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <style type="text/css">
+  #logo {
+	position:absolute; 
+	background-color:#ff6600; 
+	width:2.5%; 
+	top:10px; 
+	height:25px;
+	left:2.5%;
+  }
+  #header {
+	position:absolute;
+	background-color:#ff6600; 
+	width:75%; 
+	top:10px; 
+	height:25px;
+	left:5%
+  }
+  #user_nav {
+	position:absolute; 
+	background-color:#ff6600; 
+	width:47.5%;
+	left:50%;
+	float:right; 
+	top:10px; 
+	height:25px
+  }
+  #main {
+	position:absolute; 
+	background-color:#f6f6ef; 
+	width:95%;
+	left:2.5%; 
+	top:35px
+  }
+  </style>
 </head>
 <body>
 <!-- <p class="notice"><%= notice %></p> -->
 <!-- <p class="alert"><%= alert %></p> -->
 
-  <div id="header" style="position:absolute; background-color:#ff6600; width:800px; top:0px; height:25px" align=left>
-        <a href="http://ycombinator.com/"><img src="http://ycombinator.com/images/y18.gif" style="border:1px white solid"></a>
-
+  <div id="logo" align=center>
+        <a href="http://ycombinator.com/"><img src="http://ycombinator.com/images/y18.gif" 
+			style="border:1px white solid" height=18 width=18></a></div>
+  <div id="header" align=left>
       <b>Hacker News </b>
     <%= link_to "news", news_index_path %> |
     <%= link_to 'comments', discusses_path %> |
     <%= link_to 'submit', new_news_path %>
   </div>
-	<div id="user_nav" style="position:absolute; background-color:#ff6600; width:400px; top:0px; left:800px; height:25px" align=right>
+	<div id="user_nav" align=right>
 	  <% if user_signed_in? %>
 	    Signed in as <%= current_user.email %>. Not you?
 	    <%= link_to "logout", destroy_user_session_path(@post), :method => :delete %>
@@ -26,7 +61,7 @@
 	    <%= link_to "login", new_user_session_path %>
 	  <% end %>
   </div>
-<div id="main" style="position:absolute; background-color:#feead8; width:1200px; top:25px">
+<div id="main" align=left>
 
 
 <%= yield %> 

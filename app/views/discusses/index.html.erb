@@ -5,18 +5,17 @@
 </div>
 <% @discuss = Discuss.new %>
 <%= render 'form' %>
-<div>
+
 <% @discusses.each do |discuss| %>
-
-  <%= discuss.news_id %>.  <%= discuss.comment %>
-
- </div>
   <div>
-
+  <%= discuss.news_id %>.  <%= discuss.comment %>
+  </div>
+  <div>
     <%= link_to 'remove', discuss, method: :delete, data: { confirm: 'Are you sure?' } %>
 	 | Created <%= time_ago_in_words discuss.created_at %> ago by 
 	<%= discuss.user.try(:email) %>
-	
-  </div><% end %>
-
+  </div>
+  
+<% end %>
+  
 

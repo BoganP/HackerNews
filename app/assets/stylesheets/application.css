@@ -11,3 +11,27 @@
  *= require_self
  *= require_tree .
  */
+#header {
+  position:absolute;
+  background-color:#ff6600; 
+  width:50%; 
+  top:10px; 
+  height:25px;
+  left:5%
+}
+#user_nav {
+  position:absolute; 
+  background-color:#ff6600; 
+  width:47.5%;
+  left:50%;
+  float:right; 
+  top:10px; 
+  height:25px
+}
+#main {
+  position:absolute; 
+  background-color:#f6f6ef; 
+  width:95%;
+  left:2.5%; 
+  top:35px
+}

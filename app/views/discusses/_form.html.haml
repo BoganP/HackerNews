@@ -1,0 +1,15 @@
+= form_for @discuss, :url => { :action => "create", :id => :news_id} do |f|
+  - if @discuss.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@discuss.errors.count, "error")
+        prohibited this discuss from being saved:
+      %ul
+        - @discuss.errrors.full_messages.each do |msg|
+          %li msg
+  .field
+    = f.label :comment
+    %br/
+    = f.text_area :comment
+  .actions
+    = f.submit

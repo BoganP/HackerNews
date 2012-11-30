@@ -1,0 +1,27 @@
+!!!
+%html
+  %head
+    %title Hacker News
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+
+%body
+#logo{:align => "center"}
+  %a{:href => "http://ycombinator.com/"}
+    %img{:height => "18", :src => "http://ycombinator.com/images/y18.gif", :style => "border:1px white solid", :width => "18"}/
+#header{:align => "left"}
+  %b Hacker News
+  = link_to "news", news_index_path
+  |
+  \#{link_to 'comments', discusses_path} 
+  |
+  \#{link_to 'submit', new_news_path}
+#user_nav{:align => "right"}
+  - if user_signed_in?
+    Signed in as #{current_user.email}. Not you?
+    \#{link_to "logout", destroy_user_session_path(@post), :method => :delete}
+  - else
+    = link_to "login", new_user_session_path
+#main{:align => "left"}
+  = yield

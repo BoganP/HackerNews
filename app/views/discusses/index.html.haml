@@ -1,0 +1,16 @@
+%div
+  - if params[:news_id]
+    = @news.title
+  %p
+- @discuss = Discuss.new
+= render 'form'
+- @discusses.each do |discuss|
+  %div
+    = discuss.news_id
+    \.  #{discuss.comment}
+  %div
+    = link_to 'remove', discuss, method: :delete, data: { confirm: 'Are you sure?' }
+    | Created #{time_ago_in_words discuss.created_at} ago by
+    \#{discuss.user.try(:email)}
+  
+

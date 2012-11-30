@@ -1,0 +1,16 @@
+
+%p#notice= notice
+%p
+  %b Title: 
+  = @news.title
+
+%p 
+  %b Link:
+  = @news.link
+
+%p 
+  %b Created by
+  - @user = User.find(@news.user_id)
+  = @user.email
+
+= link_to 'Back', news_index_path 

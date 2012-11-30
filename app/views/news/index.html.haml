@@ -1,0 +1,16 @@
+- @news.each do |news|
+  %div
+    = news.id
+    \.#{link_to news.title, news.link}(#{truncate_link(news.link)})
+  %div
+    = link_to 'remove', news, method: :delete, data: { confirm:'Are you sure?'}
+    | Created #{time_ago_in_words news.created_at} ago by
+    - if news.user_id != nil
+      - @user = User.find(news.user_id)
+      = @user.email
+      | 
+      - if news.discusses.count != 0
+        - @comment = pluralize(news.discusses.count, "comment")
+        = link_to @comment, news_discusses_path(news)
+      -else
+        = link_to 'discuss', news_discusses_path(news)

@@ -1,0 +1,16 @@
+%p#notice= notice
+%p
+  %b Comment:
+  = @discuss.comment
+%p
+  %b News:
+  = @discuss.news_id
+%p
+  %b Created by:
+  - @user = User.find(@discuss.user_id)
+  = @user.email
+-if @discuss.news_id
+  - news = News.find(@discuss.news_id)
+  = link_to 'Back', news_discusses_path(news)
+-else
+  = link_to 'Back', discusses_path

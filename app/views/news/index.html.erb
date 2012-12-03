@@ -1,6 +1,12 @@
 
 <% @news.each do |news| %>
-  <div><%= news.id %>. <%= link_to news.title, news.link %> (<%= truncate_link(news.link) %>)</div>
+  <div> 
+    <%= link_to news.title, news.link %> (<%= truncate_link(news.link) %>)</div> 
+  <div style="position:absolute; width:40%; left:60%; float:right" align="right"> 
+		<%= pluralize(news.score, "point") %> |
+		<%= link_to "Vote Up", up_news_path(news), method: :up %> |
+    <%= link_to "Vote Down", down_news_path(news), method: :down %>
+	</div>
   <div>
        <%= link_to 'remove', news, method: :delete, data: { confirm: 'Are you sure?' } %>
  | Created <%= time_ago_in_words news.created_at %> ago by 	
@@ -13,6 +19,7 @@
 	  <%= link_to @comment, news_discusses_path(news) %>
 	<% else %>
 	  <%= link_to 'discuss', news_discusses_path(news) %>
-	<%end%>
+	<%end%></div><br>
 <% end %>
+
 

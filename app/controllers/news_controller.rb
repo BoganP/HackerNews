@@ -6,12 +6,27 @@ class NewsController < ApplicationController
   # GET /news.json
   def index
 
-    @news = News.order(params[:sort])
+    @news = News.filter(params[:q]).all
+    
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @news }
     end
+  end
+  
+  def up
+    # document user voted so they do vote again
+    @news = News.find(params[:id])
+    @news.inc_up(current_user)
+    redirect_to news_index_path, notice: 'Up Voted!'
+  end
+  
+  def down
+    # document user voted so they do vote again
+    @news = News.find(params[:id])
+    @news.inc_down(current_user)
+    redirect_to news_index_path, notice: 'Down Voted!'
   end
 
   # GET /news/1
@@ -54,6 +69,7 @@ class NewsController < ApplicationController
   def create
     @news = News.new(params[:news])
     @news.user = current_user
+    @news.set_defaults
 
     respond_to do |format|
       if @news.save

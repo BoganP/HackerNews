@@ -8,6 +8,10 @@ HackerNews::Application.routes.draw do
   resources :news do
     resources :discusses
     resources :user
+    member do
+      post 'up'
+      post 'down'
+    end
   end
   
   

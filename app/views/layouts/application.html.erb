@@ -5,11 +5,11 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-  <style type="text/css">
+ <style type="text/css">
   #logo {
 	position:absolute; 
 	background-color:#ff6600; 
-	width:2.5%; 
+	width:3%; 
 	top:10px; 
 	height:25px;
 	left:2.5%;
@@ -48,8 +48,8 @@
         <a href="http://ycombinator.com/"><img src="http://ycombinator.com/images/y18.gif" 
 			style="border:1px white solid" height=18 width=18></a></div>
   <div id="header" align=left>
-      <b>Hacker News </b>
-    <%= link_to "news", news_index_path %> |
+    <%= link_to "Hacker News", news_index_path %>
+    <%= link_to "news", news_index_path(:q => 'latest') %> | 
     <%= link_to 'comments', discusses_path %> |
     <%= link_to 'submit', new_news_path %>
   </div>

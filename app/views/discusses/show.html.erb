@@ -1,5 +1,4 @@
 
-
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -17,7 +16,6 @@
   <% @user = User.find(@discuss.user_id) %>
   <%= @user.email %>	
 </p>
-
 <% if @discuss.news_id %>
   <% news = News.find(@discuss.news_id) %>
   <%= link_to 'Back', news_discusses_path(news) %>

@@ -3,6 +3,7 @@ HackerNews::Application.routes.draw do
   
   resources :discusses do
     resources :user
+    resources :discusses
   end
 
   resources :news do

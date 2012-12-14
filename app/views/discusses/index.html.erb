@@ -7,15 +7,27 @@
 <%= render 'form' %>
 
 <% @discusses.each do |discuss| %>
-  <div>
-  <%= discuss.news_id %>.  <%= discuss.comment %>
-  </div>
-  <div>
-    <%= link_to 'remove', discuss, method: :delete, data: { confirm: 'Are you sure?' } %>
-	 | Created <%= time_ago_in_words discuss.created_at %> ago by 
-	<%= discuss.user.try(:email) %>
-  </div>
-  
+	<% if discuss.parent_id == nil %>
+  	<div>
+      <%= discuss.comment %>
+    </div>
+    <div>
+      <%= link_to 'remove', discuss, method: :delete, data: { confirm: 'Are you sure?' } %>
+	 	  | Created <%= time_ago_in_words discuss.created_at %> ago by 
+	    <%= discuss.user.try(:email) %> | <%= link_to 'reply', new_discuss_discuss_path(discuss) %>
+    </div><br>
+    <% @discusses.each do |d| %>
+      <% if d.parent_id == discuss.id %>
+        <div id ="reply">
+          <%= d.comment %>
+          <br>
+	        <%= link_to 'remove', d, method: :delete, data: { confirm: 'Are you sure?' } %>
+	 	      | Created <%= time_ago_in_words d.created_at %> ago by 
+	        <%= d.user.try(:email) %>
+        </div><br>
+      <% end %>
+    <% end %>
+  <% end %>
 <% end %>
   
 

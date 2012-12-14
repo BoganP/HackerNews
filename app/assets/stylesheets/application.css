@@ -35,3 +35,7 @@
   left:2.5%; 
   top:35px
 }
+#reply{
+	position:relative;
+	left: 20px;
+}

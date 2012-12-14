@@ -53,15 +53,19 @@ class DiscussesController < ApplicationController
   # POST /discusses
   # POST /discusses.json
   def create
-
+puts "$" * 80
+puts params
     @discuss = Discuss.new(params[:discuss])
-    @discuss.user_id = current_user.id
+    @discuss.user = current_user
     @discuss.news_id = params[:news_id]
-
+    @discuss.parent_id = params[:discuss_id]
+    if (@discuss.parent_id != nil)
+      @discuss.news_id = Discuss.find(@discuss.parent_id).news_id
+    end
     
     respond_to do |format|
       if @discuss.save
-        format.html { redirect_to @discuss, notice: 'Discuss was successfully created.' }
+        format.html { redirect_to @discuss, notice: 'Comment was successfully created.' }
         format.json { render json: @discuss, status: :created, location: @discuss }
       else
         format.html { render action: "new" }
@@ -103,4 +107,23 @@ class DiscussesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+#  def reply
+#puts "$" * 80
+#puts params
+#    @discuss = Discuss.new(params[:discuss])
+#    @discuss.user_id = current_user.id
+#    @discuss.parent_id = params[:parent_id]
+
+    
+#    respond_to do |format|
+#      if @discuss.save
+#        format.html { redirect_to @discuss, notice: 'Reply was successfully created.' }
+#        format.json { render json: @discuss, status: :created, location: @discuss }
+#      else
+#        format.html { render action: "new" }
+#        format.json { render json: @discuss.errors, status: :unprocessable_entity }
+#      end
+#    end
+#  end
 end
